@@ -25,5 +25,5 @@ urlpatterns = [
     # path (r'', include('khu_calendar.urls')),
 
     #board app
-    # path('board/', include('calendar_board.urls')),
+    path('board/', include('calendar_board.urls')),
 ]

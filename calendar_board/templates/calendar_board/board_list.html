@@ -1,0 +1,15 @@
+{% extends 'khu_calendar/common/header.html' %}
+{% load static %}
+{% block main %}
+
+<div class="col-md-12">
+  <div class="container">
+
+    {% for list in board_list %}
+      {{ list.title }} <br>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock main %}
