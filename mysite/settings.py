@@ -141,4 +141,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# 서버는 여려개의 도메인을 가질 수 있는데, 그 중에 허용할 도메인을 입력
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+# ALLOWED_HOSTS = ['*'] # 모든 도메인에 대해서 허용
