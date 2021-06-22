@@ -4,12 +4,34 @@ from .forms import BoardForm
 
 from django.views import View
 from django.views import generic
+from datetime import datetime, timedelta
 
 class calendar_board(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         template_name = 'calendar_board/calendar_board_list.html'
-        board_list = BoardList.objects.all()
-        return render(request, template_name, {"board_list": board_list})
+        # 기한 없는 일정, 마감 X
+        board_list_no_endDate = BoardList.objects.all().filter(end_date__isnull=True, is_complete=0).order_by('priority')
+        # 기한 있고, 마감 O
+        board_list_endDate_non_complete = BoardList.objects.all().filter(end_date__isnull=False, is_complete=0).order_by('priority')
+        # 마김 O
+        board_list_endDate_complete = BoardList.objects.all().filter(is_complete=1).order_by('end_date')
+        today = datetime.now()
+        # deadline is close
+        close_end_day = []
+        # over time
+        over_end_day = []
+
+        for i in board_list_endDate_non_complete:
+            e_day = str(i.end_date).split("-")
+            end_day = datetime(int(e_day[0]), int(e_day[1]), int(e_day[2]))
+            if (end_day - today).days < -1: over_end_day.append(i.title)
+            if (end_day - today).days >= -1 and (end_day - today).days < 3: close_end_day.append(i.title)
+            # 현재 날짜와 비교해서 기한 체크
+
+        return render(request, template_name, {"board_list_endDate_non_complete": board_list_endDate_non_complete, "board_list_endDate_complete": board_list_endDate_complete, "board_list_no_endDate": board_list_no_endDate, 'close_end_day': close_end_day, 'over_end_day':over_end_day})
+
+        # board_list = BoardList.objects.all()
+        # return render(request, template_name, {"board_list": board_list})
 
 class calendar_board_detail(generic.DetailView):
     model = BoardList
