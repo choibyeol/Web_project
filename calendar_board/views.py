@@ -6,6 +6,7 @@ from django.views import View
 from django.views import generic
 from datetime import datetime, timedelta
 
+# board view
 class calendar_board(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         template_name = 'calendar_board/calendar_board_list.html'
@@ -33,11 +34,13 @@ class calendar_board(generic.TemplateView):
         # board_list = BoardList.objects.all()
         # return render(request, template_name, {"board_list": board_list})
 
+# board_detail view
 class calendar_board_detail(generic.DetailView):
     model = BoardList
     template_name = 'calendar_board/calendar_board_detail.html'
     context_object_name = 'board_list'
 
+# board_update view
 class calendar_board_update(generic.UpdateView):
     model = BoardList
     fields = ('title', 'content', 'end_date')
@@ -56,6 +59,7 @@ class calendar_board_update(generic.UpdateView):
         context = self.get_context_data(object=self.object, form=form)
         return self.render_to_response(context)
 
+# board_delete view
 class calendar_board_delete(generic.DeleteView):
     model = BoardList
     success_url = '/board/'
