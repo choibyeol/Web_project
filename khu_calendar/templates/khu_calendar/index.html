@@ -4,12 +4,25 @@
 
 <div class="col-md-12">
   <div class="container">
-    <center><h1>Khu Calendar</h1></center>
+    <center><h1 style="font-weight: bold;">Khu Calendar</h1></center>
   </div>
-
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_insert' %} '">
-  일정 추가
-</button>
+
+<div class="container">
+  <div style="text-align: center; margin-top: 10%;">
+    <h3><p> Python django를 활용한 캘린더 앱입니다. <br><br>
+      시작하기를 눌러 일정을 추가해 보세요!</p></h3>
+
+    <br>
+    <h5><p>깃허브: <a href="https://github.com/choibyeol/Web_project">https://github.com/choibyeol/Web_project</a></p><h5>
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 10%;">
+  <button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='{% url 'calendar_board:calendar_board_insert' %} '">
+    시작하기
+  </button>
+</div>
+
 
 {% endblock main %}

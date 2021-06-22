@@ -20,8 +20,11 @@
           </tr>
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_update' pk=board_list.pk %} '">수정</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_delete' pk=board_list.pk %} '">삭제</button>
+    <div style="text-align: center; margin-top: 5%;">
+      <button style="margin-right: 3%;" type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='{% url 'calendar_board:calendar_board_update' pk=board_list.pk %} '">수정</button>
+      <button style="margin-left: 3%;" type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='{% url 'calendar_board:calendar_board_delete' pk=board_list.pk %} '">삭제</button>
+    </div>
+
   </div>
 </section>
 
