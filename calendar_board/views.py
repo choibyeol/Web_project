@@ -6,6 +6,9 @@ from django.views import View
 from django.views import generic
 from datetime import datetime, timedelta
 
+from django.http import JsonResponse
+import json
+
 # board view
 class calendar_board(generic.TemplateView):
     def get(self, request, *args, **kwargs):
@@ -65,17 +68,48 @@ class calendar_board_delete(generic.DeleteView):
     success_url = '/board/'
     context_object_name = 'board_list'
 
-# 새로운 일정 추가할 때
+
 def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'
     if request.method == "POST":
-        form = BoardForm(request.POST)
-        if form.is_valid():
-            board = form.save(commit=False)
-            board.board_save()
-            message = "일정을 추가했습니다."
-            return render(request, template_name, {"message": message})
+        if str(request.path).split("/board/")[1].split("/")[0] == "insert":
+            form = boardForm(request.POST)
+            if form.is_valid():
+                message = "일정을 추가했습니다."
+                if len(request.POST.get('title')) < 2:
+                    message = "제목은 2글자 이상으로 입력해 주세요."
+                else:
+                    board = form.save(commit=False)
+                    board.board_save()
+                return render(request, template_name, {"message": message})
+        elif str(request.path).split("/board/")[1].split("/")[0] == "save_prioirity":
+            board_list = json.loads(request.POST['board_dict'])
+            for key, value in board_list.items():
+                if key == "None" : continue
+                board_selected = BoardList.objects.get(pk=key)
+                board_selected.priority = value
+                board_selected.save()
+            return JsonResponse({'text': '저장 되었습니다.'})
+        elif str(request.path).split("/board/")[1].split("/")[0] == "is_complete":
+            pk = request.POST['data']
+            return_value = checkbox_event(pk, True)
+            return JsonResponse(return_value)
+        elif str(request.path).split("/board/")[1].split("/")[0] == "is_non_complete":
+            pk = request.POST['data']
+            return_value = checkbox_event(pk, False)
+            return JsonResponse(return_value)
     else:
         template_name = 'calendar_board/calendar_board_insert.html'
         form = BoardForm
-        return render(request, template_name, {"form": form})
+        return render(request, template_name, {"form" : form})
+
+def checkbox_event(pk, is_check):
+    board_selected = BoardList.objects.get(pk=pk)
+    if is_check == True:
+        board_selected.is_complete = 1
+        board_selected.priority = None
+    else :
+        board_selected.is_complete = 0
+    board_selected.save()
+    return_value = {'text': '저장되었습니다.'}
+    return return_value

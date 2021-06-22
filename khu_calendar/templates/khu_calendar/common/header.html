@@ -52,5 +52,74 @@
     {% block main %}
 
     {% endblock main %}
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        function prioirty_save(){
+            board_list = $(".list-group-item");
+            board_dict = {}
+            for(var i = 0 ; i < board_list.length ; i++){
+                board_dict[board_list[i].getAttribute("div_pk")] = i + 1
+            }
+            console.log(board_dict);
+            $.ajax({
+              type: "POST",
+              url: "{% url 'calendar_board:calendar_board_save_priority' %}",
+              data: {'board_dict': JSON.stringify(board_dict), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+              dataType: "json",
+              success: function(response){
+                console.log("성공");
+                window.location.href = "{% url 'calendar_board:calendar_board' %}"
+              },
+              error: function(request, status, error){
+                console.log("실패.");
+              },
+            });
+        }
+    </script>
+
+    <script>
+        completed = document.getElementsByName('complete');
+        for(var i = 0; i < completed.length ; i++){
+            completed[i].checked = true;
+        } // checkbox 내용 가져옴. 일정이 마감된 것들은 checked true.
+
+        $("input[name*=complete]").change(function(){
+        // input type에서 name에 complete가 포함된 모든 것에 대해서 change. 즉, 바뀌었을 때 이벤트 추가
+            if($(this).is(":checked")){
+                pk = $(this).attr("pk");
+                $.ajax({
+                  type: "POST",
+                  url: "{% url 'calendar_board:calendar_board_is_complete' %}",
+                  data: {'data': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                  dataType: "json",
+                  success: function(response){
+                    console.log("성공");
+                    window.location.href = "{% url 'calendar_board:calendar_board' %}"
+                  },
+                  error: function(request, status, error){
+                    console.log("실패.");
+                  },
+                });
+            }
+            // 체크박스 해제되었을 때 이벤트 처리
+            else{
+                pk = $(this).attr("pk");
+                $.ajax({
+                  type: "POST",
+                  url: "{% url 'calendar_board:calendar_board_is_non_complete' %}",
+                  data: {'data': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                  dataType: "json",
+                  success: function(response){
+                    window.location.href = "{% url 'calendar_board:calendar_board' %}"
+                  },
+                  error: function(request, status, error){
+                    console.log("실패.");
+                  },
+                });
+            }
+        });
+
+    </script>
   </body>
 </html>
