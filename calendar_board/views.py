@@ -34,6 +34,11 @@ class calendar_board_update(generic.UpdateView):
         context = self.get_context_data(object=self.object, form=form)
         return self.render_to_response(context)
 
+class calendar_board_delete(generic.DeleteView):
+    model = BoardList
+    success_url = '/board/'
+    context_object_name = 'board_list'
+
 def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'
     if request.method == "POST":

@@ -4,10 +4,24 @@
 
 <section id="blog">
   <div class="container">
-    {{ board_list }}
-    <h2>{{ board_list.title }}</h2>
-    <p>{{ board_list.content | linebreaksbr }}</p><br>
-    <h2><a href="{% url 'calendar_board:calendar_board_update' pk=board_list.pk %}">수정</a></h2>
+    <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>내용</th>
+              <th>마감일</th>
+            </tr>
+          </thead>
+        <tbody>
+          <tr>
+            <td>{{ board_list.title }}</td>
+            <td>{{ board_list.content }}</td>
+            <td>{{ board_list.end_date }}</td>
+          </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_update' pk=board_list.pk %} '">수정</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_delete' pk=board_list.pk %} '">삭제</button>
   </div>
 </section>
 

@@ -1,0 +1,17 @@
+{% extends 'khu_calendar/common/header.html' %}
+{% load static %}
+{% block main %}
+
+<section id="blog">
+  <div class="container">
+      <form method="POST" class="post-form">
+         {%csrf_token%}
+
+         <p>정말로 {{ board_list.title }}를 삭제 하시겠습니까?</p>
+         {{form.as_p}}
+         <input type="submit" class="save btn btn-default" value="Confirm"/>
+     </form>
+  </div>
+</section>
+
+{% endblock main %}
