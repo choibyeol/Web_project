@@ -4,12 +4,15 @@
 
 <div class="col-md-12">
   <div class="container">
-
     {% for list in board_list %}
-      {{ list.title }} <br>
+      <div class="list-group-item"><input type="checkbox" name="{{list.title}}" value="{{list.title}}">
+        <a href="{% url 'calendar_board:calendar_board_detail' pk=list.no %}">{{list.title}}</a>
+      </div>
     {% endfor %}
-
   </div>
+  <button type="button" class="btn btn-primary" onclick="location.href='{% url 'calendar_board:calendar_board_insert' %} '">
+    글쓰기
+  </button>
 </div>
 
 {% endblock main %}

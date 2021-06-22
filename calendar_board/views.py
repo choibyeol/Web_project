@@ -11,6 +11,10 @@ class calendar_board(generic.TemplateView):
         board_list = BoardList.objects.all()
         return render(request, template_name, {"board_list": board_list})
 
+class calendar_board_detail(generic.DetailView):
+    model = BoardList
+    template_name = 'calendar_board/calendar_board_detail.html'
+    context_object_name = 'board_list'
 
 def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'

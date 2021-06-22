@@ -1,0 +1,13 @@
+{% extends 'khu_calendar/common/header.html' %}
+{% load static %}
+{% block main %}
+
+<section id="blog">
+  <div class="container">
+    {{ board_list }}
+    <h2>{{ board_list.title }}</h2>
+    <p>{{ board_list.content | linebreaksbr }}</p><br>
+  </div>
+</section>
+
+{% endblock main %}
