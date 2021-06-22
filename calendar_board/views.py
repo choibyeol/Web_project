@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import BoardList
 from .forms import BoardForm
 
@@ -10,6 +10,7 @@ class calendar_board(generic.TemplateView):
         template_name = 'calendar_board/calendar_board_list.html'
         board_list = BoardList.objects.all()
         return render(request, template_name, {"board_list": board_list})
+
 
 def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'
