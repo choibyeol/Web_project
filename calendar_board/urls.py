@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^$', views.calendar_board.as_view(), name='calendar_board'),
     url(r'^insert/$', views.check_post, name='calendar_board_insert'),
     url(r'^(?P<pk>[0-9]+)/detail/$', views.calendar_board_detail.as_view(), name='calendar_board_detail'),
-    # url(r'^(?P<pk>[0-9]+)/update/$', views.calendar_board_update.as_view(), name='calendar_board_update'),
+    url(r'^(?P<pk>[0-9]+)/update/$', views.calendar_board_update.as_view(), name='calendar_board_update'),
     # url(r'^(?P<pk>[0-9]+)/delete/$', views.calendar_board_delete.as_view(), name='calendar_board_delete'),
 ]
 

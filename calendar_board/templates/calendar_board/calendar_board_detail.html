@@ -7,6 +7,7 @@
     {{ board_list }}
     <h2>{{ board_list.title }}</h2>
     <p>{{ board_list.content | linebreaksbr }}</p><br>
+    <h2><a href="{% url 'calendar_board:calendar_board_update' pk=board_list.pk %}">수정</a></h2>
   </div>
 </section>
 

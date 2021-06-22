@@ -1,0 +1,16 @@
+{% extends 'khu_calendar/common/header.html' %}
+{% load static %}
+{% block main %}
+
+<section id="blog">
+  <div class="container">
+    <form method="POST" class="post-form">
+       {%csrf_token%}
+
+       {{form.as_p}}
+       <button type="submit" class="save btn btn-default">저장</button>
+    </form>
+  </div>
+</section>
+
+{% endblock main %}
