@@ -1,7 +1,36 @@
-<head>
+<html lang="ko">
+  {% load static %}
+  <head>
+    <meta http-equiv="content-type" content="text/html;" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
-<body>
-  {% block main %}
-  {% endblock main %}
-</body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/Sortable.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#"></a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="#"><div class="home">Home</div></a></li>
+                <li><a href="#"><div class="dolist">할 일</div></a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span></a><div class="sign-up">회원가입</div></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a><div class="log-in">로그인</div></li>
+              </ul>
+            </div>
+          </nav>
+    {% block main %}
+
+    {% endblock main %}
+  </body>
+</html>
