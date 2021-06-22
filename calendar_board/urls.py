@@ -9,6 +9,7 @@ app_name = 'calendar_board'
 
 urlpatterns = [
     url(r'^$', views.calendar_board.as_view(), name='calendar_board'),
+    url('insert/', views.check_post, name='calendar_board_insert'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
