@@ -65,6 +65,7 @@ class calendar_board_delete(generic.DeleteView):
     success_url = '/board/'
     context_object_name = 'board_list'
 
+# 새로운 일정 추가할 때
 def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'
     if request.method == "POST":
