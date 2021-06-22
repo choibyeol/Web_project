@@ -73,11 +73,11 @@ def check_post(request):
     template_name = 'calendar_board/calendar_board_success.html'
     if request.method == "POST":
         if str(request.path).split("/board/")[1].split("/")[0] == "insert":
-            form = boardForm(request.POST)
+            form = BoardForm(request.POST)
             if form.is_valid():
                 message = "일정을 추가했습니다."
                 if len(request.POST.get('title')) < 2:
-                    message = "제목은 2글자 이상으로 입력해 주세요."
+                    message = "제목은 2글자 이상 입력해 주세요."
                 else:
                     board = form.save(commit=False)
                     board.board_save()
@@ -89,7 +89,7 @@ def check_post(request):
                 board_selected = BoardList.objects.get(pk=key)
                 board_selected.priority = value
                 board_selected.save()
-            return JsonResponse({'text': '저장 되었습니다.'})
+            return JsonResponse({'text': '저장되었습니다.'})
         elif str(request.path).split("/board/")[1].split("/")[0] == "is_complete":
             pk = request.POST['data']
             return_value = checkbox_event(pk, True)

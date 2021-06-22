@@ -3,10 +3,10 @@
 {% block main %}
 
 <div class="alert alert-info">
-    <strong>마감이 지난 일정!</strong> {{ over_end_day }}
+    <strong>마감이 지났어요!</strong> {{ over_end_day }}
 </div>
 <div class="alert alert-info">
-    <strong>마감이 가까운 일정!</strong> {{ close_end_day }}
+    <strong>마감이 가까워요!</strong> {{ close_end_day }}
 </div>
 <div class="col-md-4">
     <div class="container">
@@ -33,7 +33,7 @@
 
 <div class="col-md-4">
     <div class="container">
-        <h2>마감 된 일정</h2><br>
+        <h2>마감된 일정</h2><br>
         <div class="list-group col">
             {% with end_date="마감일 없음" %}
                 {% for list in board_list_endDate_complete %}
